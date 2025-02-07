@@ -12,10 +12,11 @@ def detail(request,pk):
 
 @login_required
 def new(request):
+    form=NewItemForm()
     if request.method=='POST':
         form=NewItemForm(request.POST,request.FILES)
 
-        if form.is_valid:
+        if form.is_valid():
             item=form.save(commit=False)
             item.created_by=request.user
             item.save()
